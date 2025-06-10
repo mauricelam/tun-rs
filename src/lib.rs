@@ -38,7 +38,8 @@ loop {
     target_os = "windows",
     all(target_os = "linux", not(target_env = "ohos")),
     target_os = "macos",
-    target_os = "freebsd"
+    target_os = "freebsd",
+    target_os = "android"
 ))]
 pub use crate::builder::*;
 pub use crate::platform::*;
@@ -55,7 +56,8 @@ pub use async_device::*;
     target_os = "windows",
     all(target_os = "linux", not(target_env = "ohos")),
     target_os = "macos",
-    target_os = "freebsd"
+    target_os = "freebsd",
+    target_os = "android"
 ))]
 mod builder;
 mod platform;

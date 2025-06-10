@@ -67,7 +67,7 @@ libloading = "0.8"
 route_manager = "0.1.4"
 
 
-[target.'cfg(any(target_os = "linux", target_os = "freebsd",target_os = "windows"))'.dependencies]
+[target.'cfg(any(target_os = "linux", target_os="android", target_os = "freebsd",target_os = "windows"))'.dependencies]
 mac_address = "1.1.7"
 
 [build-dependencies]

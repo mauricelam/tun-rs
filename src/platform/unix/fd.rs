@@ -14,6 +14,7 @@ impl Fd {
         target_os = "windows",
         target_os = "macos",
         all(target_os = "linux", not(target_env = "ohos")),
+        target_os = "android",
         target_os = "freebsd"
     ))]
     pub(crate) fn new(value: RawFd) -> io::Result<Self> {

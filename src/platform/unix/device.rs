@@ -2,6 +2,7 @@ use crate::platform::unix::{Fd, Tun};
 use crate::platform::DeviceImpl;
 #[cfg(any(
     all(target_os = "linux", not(target_env = "ohos")),
+    target_os = "android",
     target_os = "macos",
     target_os = "freebsd"
 ))]
@@ -113,6 +114,7 @@ impl DeviceImpl {
 }
 #[cfg(any(
     all(target_os = "linux", not(target_env = "ohos")),
+    target_os = "android",
     target_os = "macos",
     target_os = "freebsd"
 ))]
@@ -166,6 +168,7 @@ impl DeviceImpl {
 }
 #[cfg(any(
     all(target_os = "linux", not(target_env = "ohos")),
+    target_os = "android",
     target_os = "macos",
     target_os = "freebsd"
 ))]
@@ -174,6 +177,7 @@ pub(crate) unsafe fn ctl() -> io::Result<Fd> {
 }
 #[cfg(any(
     all(target_os = "linux", not(target_env = "ohos")),
+    target_os = "android",
     target_os = "macos",
     target_os = "freebsd"
 ))]
