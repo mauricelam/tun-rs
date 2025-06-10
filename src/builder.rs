@@ -15,7 +15,8 @@ pub enum Layer {
         target_os = "windows",
         target_os = "linux",
         target_os = "freebsd",
-        target_os = "macos"
+        target_os = "macos",
+        target_os = "android"
     ))]
     L2,
     #[default]
@@ -73,15 +74,16 @@ pub(crate) struct DeviceConfig {
         target_os = "ios",
         target_os = "tvos",
         target_os = "macos",
-        target_os = "linux"
+        target_os = "linux",
+        target_os = "android"
     ))]
     pub packet_information: Option<bool>,
     /// Enable/Disable TUN offloads.
     /// After enabling, use `recv_multiple`/`send_multiple` for data transmission.
-    #[cfg(target_os = "linux")]
+    #[cfg(any(target_os = "linux", target_os = "android"))]
     pub offload: Option<bool>,
     /// Enable multi queue support
-    #[cfg(target_os = "linux")]
+    #[cfg(any(target_os = "linux", target_os = "android"))]
     pub multi_queue: Option<bool>,
 }
 type IPV4 = (
@@ -116,6 +118,7 @@ pub struct DeviceBuilder {
     #[cfg(any(
         target_os = "windows",
         target_os = "linux",
+        target_os = "android",
         target_os = "freebsd",
         target_os = "macos"
     ))]
@@ -135,17 +138,18 @@ pub struct DeviceBuilder {
         target_os = "ios",
         target_os = "tvos",
         target_os = "macos",
-        target_os = "linux"
+        target_os = "linux",
+        target_os = "android"
     ))]
     packet_information: Option<bool>,
     #[cfg(target_os = "linux")]
     tx_queue_len: Option<u32>,
     /// Enable/Disable TUN offloads.
     /// After enabling, use `recv_multiple`/`send_multiple` for data transmission.
-    #[cfg(target_os = "linux")]
+    #[cfg(any(target_os = "linux", target_os = "android"))]
     offload: Option<bool>,
     /// Enable multi queue support
-    #[cfg(target_os = "linux")]
+    #[cfg(any(target_os = "linux", target_os = "android"))]
     multi_queue: Option<bool>,
 }
 
@@ -191,6 +195,7 @@ impl DeviceBuilder {
     #[cfg(any(
         target_os = "windows",
         target_os = "linux",
+        target_os = "android",
         target_os = "freebsd",
         target_os = "macos"
     ))]
@@ -394,12 +399,13 @@ impl DeviceBuilder {
                 target_os = "ios",
                 target_os = "tvos",
                 target_os = "macos",
-                target_os = "linux"
+                target_os = "linux",
+                target_os = "android"
             ))]
             packet_information: self.packet_information.take(),
-            #[cfg(target_os = "linux")]
+            #[cfg(any(target_os = "linux", target_os = "android"))]
             offload: self.offload.take(),
-            #[cfg(target_os = "linux")]
+            #[cfg(any(target_os = "linux", target_os = "android"))]
             multi_queue: self.multi_queue.take(),
         }
     }
@@ -419,7 +425,7 @@ impl DeviceBuilder {
         if let Some(tx_queue_len) = self.tx_queue_len {
             device.set_tx_queue_len(tx_queue_len)?;
         }
-        #[cfg(any(target_os = "linux", target_os = "freebsd", target_os = "macos"))]
+        #[cfg(any(target_os = "linux", target_os="android", target_os = "freebsd", target_os = "macos"))]
         if let Some(mac_addr) = self.mac_addr {
             device.set_mac_address(mac_addr)?;
         }
