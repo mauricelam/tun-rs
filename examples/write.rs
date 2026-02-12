@@ -9,6 +9,7 @@ use std::sync::{mpsc::Receiver, Arc};
     target_os = "macos",
     target_os = "freebsd",
     target_os = "openbsd",
+    target_os = "android",
 ))]
 use tun_rs::DeviceBuilder;
 #[allow(unused_imports)]
@@ -31,7 +32,6 @@ fn main() -> std::io::Result<()> {
 #[cfg(any(
     target_os = "ios",
     target_os = "tvos",
-    target_os = "android",
     target_os = "netbsd",
     all(target_os = "linux", target_env = "ohos")
 ))]
@@ -44,6 +44,7 @@ fn main_entry(_quit: Receiver<()>) -> std::io::Result<()> {
     target_os = "macos",
     target_os = "freebsd",
     target_os = "openbsd",
+    target_os = "android",
 ))]
 fn main_entry(quit: Receiver<()>) -> std::io::Result<()> {
     let dev = Arc::new(

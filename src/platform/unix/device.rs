@@ -6,6 +6,7 @@ use crate::platform::DeviceImpl;
     target_os = "freebsd",
     target_os = "openbsd",
     target_os = "netbsd",
+    target_os = "android",
 ))]
 use libc::{AF_INET, AF_INET6, SOCK_DGRAM};
 use std::io;
@@ -149,6 +150,7 @@ impl DeviceImpl {
     target_os = "freebsd",
     target_os = "openbsd",
     target_os = "netbsd",
+    target_os = "android",
 ))]
 impl DeviceImpl {
     /// Retrieves the interface index for the network interface.
@@ -213,6 +215,7 @@ impl DeviceImpl {
     target_os = "freebsd",
     target_os = "openbsd",
     target_os = "netbsd",
+    target_os = "android",
 ))]
 pub(crate) unsafe fn ctl() -> io::Result<Fd> {
     Fd::new(libc::socket(AF_INET, SOCK_DGRAM | libc::SOCK_CLOEXEC, 0))
@@ -228,6 +231,7 @@ pub(crate) unsafe fn ctl() -> io::Result<Fd> {
     target_os = "freebsd",
     target_os = "openbsd",
     target_os = "netbsd",
+    target_os = "android",
 ))]
 pub(crate) unsafe fn ctl_v6() -> io::Result<Fd> {
     Fd::new(libc::socket(AF_INET6, SOCK_DGRAM | libc::SOCK_CLOEXEC, 0))
@@ -241,7 +245,12 @@ pub(crate) unsafe fn ctl_v6() -> io::Result<Fd> {
 
 /// Helper function to safely copy a device name into a C buffer.
 /// This reduces code duplication across BSD platforms for setting interface names.
-#[cfg(any(target_os = "freebsd", target_os = "openbsd", target_os = "netbsd",))]
+#[cfg(any(
+    target_os = "freebsd",
+    target_os = "openbsd",
+    target_os = "netbsd",
+    target_os = "android",
+))]
 pub(crate) unsafe fn copy_device_name(name: &str, dest: *mut libc::c_char, max_len: usize) {
     use std::ptr;
     let copy_len = name.len().min(max_len - 1);

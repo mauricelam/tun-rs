@@ -62,6 +62,7 @@ fn rs_addr_to_sockaddr(addr: std::net::SocketAddr) -> sockaddr_union {
     target_os = "freebsd",
     target_os = "openbsd",
     target_os = "netbsd",
+    target_os = "android",
 ))]
 #[allow(dead_code)]
 pub(crate) unsafe fn ipaddr_to_sockaddr<T>(

@@ -11,6 +11,7 @@ use std::sync::Arc;
     target_os = "macos",
     target_os = "openbsd",
     target_os = "netbsd",
+    target_os = "android",
 ))]
 use tun_rs::DeviceBuilder;
 #[cfg(any(
@@ -20,6 +21,7 @@ use tun_rs::DeviceBuilder;
     target_os = "macos",
     target_os = "openbsd",
     target_os = "netbsd",
+    target_os = "android",
 ))]
 use tun_rs::Layer;
 
@@ -32,6 +34,7 @@ mod protocol_handle;
     target_os = "macos",
     target_os = "openbsd",
     target_os = "netbsd",
+    target_os = "android",
 ))]
 #[tokio::main]
 async fn main() -> io::Result<()> {
@@ -79,7 +82,6 @@ async fn main() -> io::Result<()> {
     all(target_os = "linux", target_env = "ohos"),
     target_os = "ios",
     target_os = "tvos",
-    target_os = "android",
 ))]
 fn main() -> io::Result<()> {
     unimplemented!()

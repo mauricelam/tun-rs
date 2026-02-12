@@ -4,7 +4,8 @@ mod sockaddr;
     target_os = "freebsd",
     target_os = "openbsd",
     target_os = "netbsd",
-    target_os = "macos"
+    target_os = "macos",
+    target_os = "android",
 ))]
 pub(crate) use sockaddr::sockaddr_union;
 
@@ -14,6 +15,7 @@ pub(crate) use sockaddr::sockaddr_union;
     target_os = "freebsd",
     target_os = "openbsd",
     target_os = "netbsd",
+    target_os = "android",
 ))]
 #[allow(unused_imports)]
 pub(crate) use sockaddr::ipaddr_to_sockaddr;

@@ -18,6 +18,7 @@ impl Fd {
         target_os = "freebsd",
         target_os = "openbsd",
         target_os = "netbsd",
+        target_os = "android",
     ))]
     pub(crate) fn new(value: RawFd) -> io::Result<Self> {
         if value < 0 {

@@ -10,6 +10,7 @@ pub(crate) mod unix;
         target_os = "freebsd",
         target_os = "openbsd",
         target_os = "netbsd",
+        target_os = "android",
     ))
 ))]
 pub use self::unix::DeviceImpl;
@@ -19,9 +20,15 @@ pub use unix::InterruptEvent;
 #[cfg(windows)]
 #[cfg(feature = "interruptible")]
 pub use windows::InterruptEvent;
-#[cfg(all(target_os = "linux", not(target_env = "ohos")))]
+#[cfg(any(
+    all(target_os = "linux", not(target_env = "ohos")),
+    target_os = "android"
+))]
 pub(crate) mod linux;
-#[cfg(all(target_os = "linux", not(target_env = "ohos")))]
+#[cfg(any(
+    all(target_os = "linux", not(target_env = "ohos")),
+    target_os = "android"
+))]
 pub use self::linux::*;
 
 #[cfg(target_os = "freebsd")]

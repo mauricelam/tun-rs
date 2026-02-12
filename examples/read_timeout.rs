@@ -11,7 +11,8 @@ use std::time::Duration;
     target_os = "freebsd",
     target_os = "openbsd",
     target_os = "netbsd",
-    target_os = "macos"
+    target_os = "macos",
+    target_os = "android",
 ))]
 use tun_rs::DeviceBuilder;
 #[allow(unused_imports)]
@@ -22,6 +23,7 @@ use tun_rs::InterruptEvent;
     target_os = "freebsd",
     target_os = "openbsd",
     target_os = "netbsd",
+    target_os = "android",
 ))]
 #[allow(unused_imports)]
 use tun_rs::Layer;
@@ -42,7 +44,6 @@ fn main() -> Result<(), std::io::Error> {
 #[cfg(any(
     target_os = "ios",
     target_os = "tvos",
-    target_os = "android",
     all(target_os = "linux", target_env = "ohos")
 ))]
 fn main_entry(_quit: Receiver<()>) -> Result<(), std::io::Error> {
@@ -55,6 +56,7 @@ fn main_entry(_quit: Receiver<()>) -> Result<(), std::io::Error> {
     target_os = "freebsd",
     target_os = "openbsd",
     target_os = "netbsd",
+    target_os = "android",
 ))]
 fn main_entry(quit: Receiver<()>) -> Result<(), std::io::Error> {
     #[allow(unused_imports)]

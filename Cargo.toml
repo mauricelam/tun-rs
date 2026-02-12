@@ -36,8 +36,7 @@ libc = { version = "0.2", features = ["extra_traits"] }
 nix = { version = "0.31", features = ["ioctl", "net"] }
 
 
-
-[target.'cfg(any(target_os = "linux",target_os = "windows"))'.dependencies]
+[target.'cfg(any(target_os = "linux", target_os = "android", target_os = "windows"))'.dependencies]
 netconfig-rs = "0.1.5"
 
 [target.'cfg(target_os = "windows")'.dependencies]
@@ -75,7 +74,7 @@ route_manager = "0.2.9"
 bindgen = { version = "0.72.0", optional = true }
 
 [dev-dependencies]
-ctrlc2 = { version = "3.7", features = ["tokio", "termination"] }
+ctrlc2 = { version = "3.7.3", features = ["tokio", "termination"] }
 env_logger = "0.11"
 futures = "0.3"
 pnet_packet = "0.35.0"

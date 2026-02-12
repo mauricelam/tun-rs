@@ -244,6 +244,7 @@ pub enum Layer {
         target_os = "macos",
         target_os = "openbsd",
         target_os = "netbsd",
+        target_os = "android",
     ))]
     L2,
 
@@ -315,15 +316,16 @@ pub(crate) struct DeviceConfig {
         target_os = "linux",
         target_os = "freebsd",
         target_os = "openbsd",
-        target_os = "netbsd"
+        target_os = "netbsd",
+        target_os = "android",
     ))]
     pub(crate) packet_information: Option<bool>,
     /// Enable/Disable TUN offloads.
     /// After enabling, use `recv_multiple`/`send_multiple` for data transmission.
-    #[cfg(target_os = "linux")]
+    #[cfg(any(target_os = "linux", target_os = "android"))]
     pub(crate) offload: Option<bool>,
     /// Enable multi queue support
-    #[cfg(target_os = "linux")]
+    #[cfg(any(target_os = "linux", target_os = "android"))]
     pub(crate) multi_queue: Option<bool>,
 }
 type IPV4 = (
@@ -864,7 +866,8 @@ pub struct DeviceBuilder {
         target_os = "freebsd",
         target_os = "openbsd",
         target_os = "macos",
-        target_os = "netbsd"
+        target_os = "netbsd",
+        target_os = "android",
     ))]
     mac_addr: Option<[u8; 6]>,
     #[cfg(windows)]
@@ -885,17 +888,18 @@ pub struct DeviceBuilder {
         target_os = "linux",
         target_os = "freebsd",
         target_os = "openbsd",
-        target_os = "netbsd"
+        target_os = "netbsd",
+        target_os = "android",
     ))]
     packet_information: Option<bool>,
     #[cfg(target_os = "linux")]
     tx_queue_len: Option<u32>,
     /// Enable/Disable TUN offloads.
     /// After enabling, use `recv_multiple`/`send_multiple` for data transmission.
-    #[cfg(target_os = "linux")]
+    #[cfg(any(target_os = "linux", target_os = "android"))]
     offload: Option<bool>,
     /// Enable multi queue support
-    #[cfg(target_os = "linux")]
+    #[cfg(any(target_os = "linux", target_os = "android"))]
     multi_queue: Option<bool>,
 }
 
@@ -944,7 +948,8 @@ impl DeviceBuilder {
         target_os = "freebsd",
         target_os = "openbsd",
         target_os = "macos",
-        target_os = "netbsd"
+        target_os = "netbsd",
+        target_os = "android",
     ))]
     pub fn mac_addr(mut self, mac_addr: [u8; 6]) -> Self {
         self.mac_addr = Some(mac_addr);
@@ -1132,7 +1137,8 @@ impl DeviceBuilder {
         target_os = "linux",
         target_os = "freebsd",
         target_os = "openbsd",
-        target_os = "netbsd"
+        target_os = "netbsd",
+        target_os = "android",
     ))]
     pub fn packet_information(mut self, packet_information: bool) -> Self {
         self.packet_information = Some(packet_information);
@@ -1289,12 +1295,13 @@ impl DeviceBuilder {
                 target_os = "linux",
                 target_os = "freebsd",
                 target_os = "openbsd",
-                target_os = "netbsd"
+                target_os = "netbsd",
+                target_os = "android",
             ))]
             packet_information: self.packet_information.take(),
-            #[cfg(target_os = "linux")]
+            #[cfg(any(target_os = "linux", target_os = "android"))]
             offload: self.offload.take(),
-            #[cfg(target_os = "linux")]
+            #[cfg(any(target_os = "linux", target_os = "android"))]
             multi_queue: self.multi_queue.take(),
         }
     }

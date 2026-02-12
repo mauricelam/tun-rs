@@ -10,6 +10,7 @@ use std::sync::Arc;
     target_os = "freebsd",
     target_os = "openbsd",
     target_os = "netbsd",
+    target_os = "android",
 ))]
 use tun_rs::DeviceBuilder;
 #[allow(unused_imports)]
@@ -25,6 +26,7 @@ mod protocol_handle;
     target_os = "freebsd",
     target_os = "openbsd",
     target_os = "netbsd",
+    target_os = "android",
 ))]
 #[tokio::main]
 async fn main() -> std::io::Result<()> {
@@ -66,6 +68,7 @@ async fn main() -> std::io::Result<()> {
     target_os = "macos",
     target_os = "freebsd",
     target_os = "openbsd",
+    target_os = "android",
 ))]
 #[async_std::main]
 async fn main() -> std::io::Result<()> {
@@ -95,7 +98,6 @@ async fn main() -> std::io::Result<()> {
 #[cfg(any(
     target_os = "ios",
     target_os = "tvos",
-    target_os = "android",
     all(target_os = "linux", target_env = "ohos")
 ))]
 fn main() -> std::io::Result<()> {

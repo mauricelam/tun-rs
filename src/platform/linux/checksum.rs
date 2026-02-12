@@ -189,10 +189,12 @@ pub fn pseudo_header_checksum_no_fold(
 mod tests {
     use rand::RngExt;
     // Assuming these paths are correct for your project structure
+    #[cfg(not(target_os = "android"))]
     use crate::platform::linux::checksum::{
         checksum_no_fold_avx2, checksum_no_fold_scalar, checksum_no_fold_sse41,
     };
 
+    #[cfg(not(target_os = "android"))]
     #[test]
     fn test_checksum_avx2_vs_scalar_output() {
         // Only run this test on x86/x64 architectures if AVX2 feature is detected
